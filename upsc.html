@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary: #4a6bff;
+            --secondary: #ff6b6b;
+            --dark: #2d3748;
+            --light: #f7fafc;
+            --success: #48bb78;
+            --warning: #ed8936;
+            --info: #4299e1;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #f5f7fa;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Roboto Slab', serif;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        h1 { font-size: 2.5rem; }
+        h2 { font-size: 2rem; }
+        h3 { font-size: 1.75rem; }
+        h4 { font-size: 1.5rem; }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--secondary);
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--border-radius);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), #6b46c1);
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: var(--box-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: white;
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            margin-bottom: 3rem;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            color: white;
+            max-width: 600px;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.8rem;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid white;
+            margin-left: 1rem;
+        }
+        
+        .btn-outline:hover {
+            background-color: white;
+            color: var(--primary);
+        }
+        
+        /* Grade Sections */
+        .grade-section {
+            padding: 4rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .grade-section:nth-child(even) {
+            background-color: white;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-header h2 {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary);
+            border-radius: 2px;
+        }
+        
+        .subject-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .subject-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: transform 0.3s ease;
+        }
+        
+        .subject-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .card-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem;
+        }
+        
+        .card-body {
+            padding: 1.5rem;
+        }
+        
+        .teacher-recommendation {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .teacher-info {
+            flex: 1;
+        }
+        
+        .teacher-info h4 {
+            margin-bottom: 0.3rem;
+        }
+        
+        .teacher-info p {
+            font-size: 0.9rem;
+            color: #718096;
+            margin-bottom: 0.5rem;
+        }
+        
+        .resource-link {
+            display: inline-block;
+            background-color: #f0f4f8;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            margin-right: 0.5rem;
+        }
+        
+        .study-tips {
+            background-color: #f8fafc;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin-top: 1rem;
+        }
+        
+        .study-tips h4 {
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+        
+        .study-tips h4::before {
+            content: '💡';
+            margin-right: 0.5rem;
+        }
+        
+        .study-tips ul {
+            padding-left: 1.5rem;
+        }
+        
+        .study-tips li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Skills Section */
+        .skills-section {
+            padding: 4rem 0;
+            background-color: white;
+        }
+        
+        .skill-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .skill-category {
+            background-color: #f8fafc;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .skill-category h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .skill-category h3::before {
+            content: '🔹';
+            margin-right: 0.5rem;
+        }
+        
+        .skill-resource {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px dashed #cbd5e0;
+        }
+        
+        .skill-resource:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        /* Contact Section */
+        .contact-form {
+            background-color: #f8fafc;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column ul li a {
+            color: #cbd5e0;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+        }
+        
+        .creator-info {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #4a5568;
+        }
+        
+        .creator-info p {
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid #4a5568;
+            color: #a0aec0;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.8rem; }
+            
+            .hero {
+                height: 400px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+            }
+            
+            nav ul li {
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+            
+            .hero {
+                height: 350px;
+                text-align: center;
+            }
+            
+            .hero-content {
+                max-width: 100%;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .btn-group {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn-outline {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav {
+                display: none;
+                width: 100%;
+                margin-top: 1rem;
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+            
+            .subject-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="grade-section" id="upsc">
+        <div class="container">
+            <div class="section-header">
+                <h2>UPSC</h2>
+                <p>Hardworking intensive preparation</p>
+            </div>
+            
+            <div class="subject-grid">
+                <div class="subject-card">
+                    <div class="card-header">
+                        <h3>Physics (Science)</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="teacher-recommendation">
+                            <div class="teacher-info">
+                                <h4>Best Channel:-</h4>
+                                <p>All Topics</p>
+                                <a href="https://drive.google.com/file/d/1xyz890abc/view" target="_blank" class="resource-link">Derivation Sheets</a>
+                                <a href="https://youtube.com/playlist?list=PLYFlGICvnvLjTjwbqXKbK5Vk0wfsWZ-fR" target="_blank" class="resource-link">Click here to watch video :--</a>
+                            </div>
+                        </div>
+                        <div class="study-tips">
+                            <h4>Physics Excellence:</h4>
+                            <ul>
+                                <li>Solve NCERT back exercises first</li>
+                                <li>Practice 15+ numericals daily</li>
+                                <li>Understand derivations conceptually</li>
+                                <li>Make formula sheets chapter-wise</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subject-card">
+                    <div class="card-header">
+                        <h3>Accountancy (Commerce)</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="teacher-recommendation">
+                            <div class="teacher-info">
+                                <h4>Best Channel:-</h4>
+                                <p>Complete Course</p>
+                                <a href="https://drive.google.com/file/d/1def456ghi/view" target="_blank" class="resource-link">Format Guide</a>
+                                <a href="https://youtube.com/playlist?list=PLRTQrK9Q9MNB0l1f1Z8W4X2k16K9Zey3_" target="_blank" class="resource-link">Click here to watch video :--</a>
+                            </div>
+                        </div>
+                        <div class="study-tips">
+                            <h4>Accountancy Tips:</h4>
+                            <ul>
+                                <li>Practice journal entries daily</li>
+                                <li>Master financial statement formats</li>
+                                <li>Solve specimen papers timed</li>
+                                <li>Create comparative charts of concepts</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subject-card">
+                    <div class="card-header">
+                        <h3>History (Arts)</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="teacher-recommendation">
+                            <div class="teacher-info">
+                                <h4>Best Channel:-</h4>
+                                <p>World History</p>
+                                <a href="https://drive.google.com/file/d/1jkl567mno/view" target="_blank" class="resource-link">Timelines</a>
+                                <a href="https://youtube.com/playlist?list=PLqjFFrfKcY5xcpB-YjYtJ9YwEyX8FqIJf" target="_blank" class="resource-link">Click here to watch video :--</a>
+                            </div>
+                        </div>
+                        <div class="study-tips">
+                            <h4>History Strategies:</h4>
+                            <ul>
+                                <li>Create detailed timeline charts</li>
+                                <li>Practice answer writing with citations</li>
+                                <li>Compare different historical perspectives</li>
+                                <li>Relate events to geographical changes</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+            <div class="btn-group">
+                    <a href="index.html" class="btn" >________________________________________________________________________Home______________________________________________________________________</a>
+    </div>
+</body>
+</html>
